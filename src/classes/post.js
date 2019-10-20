@@ -20,13 +20,16 @@ module.exports.post = class post {
     if(!this.body) return 'Body Invalid'// does this.body contain anything
 
     // Set Values
-    this.user = this.user.id
+    console.log(this.user)
+    this.user = this.user.uid
 
     return true
   }
 
   async push (db) {
     const e = this.validate(db);
+    console.log(e)
+    console.log(this.user)
     if(typeof e === 'boolean') return await db.findById(await db.insert(this))
     if(e.indexOf("Invalid") !== -1) return {'error': e}
     return {'error': 'Big yikes, this should never happen'}

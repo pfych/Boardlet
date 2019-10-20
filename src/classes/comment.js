@@ -21,7 +21,7 @@ module.exports.comment = class comment {
 
     // Set Values
     this.parent = this.parent.id
-    this.user = this.user.id
+    this.user = this.user.uid
 
     return true
   }
