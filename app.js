@@ -33,12 +33,18 @@ app.post(`/newComment`, async (req, res) => {
   await res.json(await (new comment(req.body.user, req.body.body, req.body.parent, db)).push(db))
 })
 
-app.get(`/posts`, async (req, res) => {
-  let posts = await db.find(i => i.type===`post`?i:false)
+app.post(`/posts`, async (req, res) => {
+  let posts = await db.find(i => i.type===`post`&&i.category.name===req.body.category?i:false)
   posts.forEach(post => {
     post.replies = getNestedReplies(post)
   })
   await res.json(posts)
 })
 
+app.get(`/categories`, async (req, res) => {
+  await res.json(await db.find(i => i.type==='category'?i:false))
+})
 
+app.get(`/users`, async (req, res) => {
+  await res.json((await db.find(i => i.type==='user'?i:false)).map(i => {delete i.secret; delete i.ip; return i }))
+})
