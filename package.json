@@ -12,6 +12,6 @@
     "express": "~4.16.1",
     "jsdom": "^15.2.0",
     "morgan": "~1.9.1",
-    "streamlet": "Puffycheeses/streamlet"
+    "streamlet": "privatesuite/streamlet"
   }
 }
