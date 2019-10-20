@@ -1,12 +1,12 @@
 const express = require('express');
-const streamlet = require('streamlet')
 
-const { post } = require('./classes/post')
-const { user } = require('./classes/user')
-const { comment } = require('./classes/comment')
-const { config } = require('./config')
+const { post } = require('./src/classes/post')
+const { user } = require('./src/classes/user')
+const { comment } = require('./src/classes/comment')
+const { config } = require('./src/config/config')
+const { db } = require('./src/config/db')
 
-let db = new streamlet(config.dbPath)
+const { getNestedReplies } = require('./src/functions/getNestedReplies')
 
 const app = express()
 app.use(express.json());
@@ -41,11 +41,3 @@ app.get(`/posts`, async (req, res) => {
 })
 
 
-// Thank you Aurame for these functions :D
-function _getNestedReplies (post, replies) {
-  return db.find(i => i.type === "comment" && i.parent === post.id ? i : false).map(i => ({...i, replies: _getNestedReplies(i, i.replies)}));
-}
-
-function getNestedReplies (post) {
-  return _getNestedReplies(post, post.replies);
-}

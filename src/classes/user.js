@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const { config } = require('../config')
+const { config } = require('../config/config')
 
 // UID Structure
 //  ┌─ First 2 Chars of IP
