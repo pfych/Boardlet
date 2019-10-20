@@ -7,8 +7,6 @@ module.exports.category = class category {
   }
 
   async validate (db) {
-    let exists = false
-    if(exists) return false
     if(!this.name) return false
     if(!this.description) return false
     return typeof this.nsfw === "boolean";

@@ -1,4 +1,5 @@
 const express = require('express');
+const { category } = require('./src/classes/category')
 
 const { post } = require('./src/classes/post')
 const { user } = require('./src/classes/user')
